@@ -1,0 +1,220 @@
+---
+title: 'run kali linux on your old android phone (no root needed)'
+publishedAt: '2026-02-15'
+summary: 'Turn any Android phone into a complete Kali Linux penetration testing lab with GUI in under 10 minutes—no rooting required.'
+---
+
+# 🐉 Kali Linux on Android: The Pocket Pentest Lab
+
+Most people think you need a $2,000 laptop or a VPS to run **Kali Linux**. This guide shows you how to run the full penetration testing suite with **desktop GUI** directly on **Android** using **Termux**.
+
+No root. No warranty void. Just a working hacking lab in your pocket.
+
+---
+
+## 📺 Video Guide
+
+Coming Soon..
+<!-- <div align="center">
+  <iframe 
+    width="100%" 
+    height="400" 
+    src="https://www.youtube.com/embed/CwrXp7DgTxM" 
+    title="OpenClaw Android Tutorial" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    allowfullscreen>
+  </iframe>
+  
+  <p>
+    <a href="https://youtu.be/CwrXp7DgTxM" target="_blank" rel="noopener noreferrer">
+      Watch on YouTube if the player doesn't load
+    </a>
+  </p>
+</div> -->
+
+## 🛠️ Prerequisites
+
+* **Android Device:** Any stock, unmodified Android phone (Android 7+)
+* **Storage:** At least 4-5GB free space
+* **Time:** 10 minutes
+
+That's it. No technical expertise required.
+
+---
+
+## 1. Install Termux
+
+Download **Termux** from the [NetHunter Store](https://store.nethunter.com) (NOT the Play Store version—it's outdated and broken).
+
+While you're there, also grab:
+* **NetHunter KeX** (VNC client for the desktop)
+* **Hacker's Keyboard** (optional but useful)
+
+Open Termux. If it seems stuck on "installing" during first launch, just hit **Enter**.
+
+---
+
+## 2. Update the Environment
+
+Run this to update all packages:
+
+```bash
+pkg update && pkg upgrade -y
+```
+
+Accept any prompts. This takes 2-3 minutes depending on your connection.
+
+---
+
+## 3. Install wget
+
+We need wget to download the NetHunter installer:
+
+```bash
+pkg install wget
+```
+
+---
+
+## 4. Download & Run the Installer
+
+Now for the main event. Run these commands:
+
+```bash
+wget -O install-nethunter-termux https://offs.ec/2MceZWr
+chmod +x install-nethunter-termux
+./install-nethunter-termux
+```
+
+**When prompted, select "Full" installation** to get all the penetration testing tools.
+
+The installer will download and configure the entire Kali Linux environment. This takes 5-10 minutes. Go grab coffee.
+
+---
+
+## 5. Set Your Desktop Password
+
+Once installation finishes, set a password for the GUI desktop:
+
+```bash
+nethunter kex passwd
+```
+
+Choose something you'll remember. You'll need this every time you connect.
+
+---
+
+## 6. Launch the Desktop
+
+Start the Kali desktop environment:
+
+```bash
+nethunter kex &
+```
+
+The `&` runs it in the background. You'll see output showing the VNC server starting on `localhost:1`.
+
+---
+
+## 7. Connect via VNC
+
+Open **RealVNC Viewer** (or the NetHunter KeX app you installed earlier).
+
+Create a new connection:
+* **Address:** `localhost:1`
+* **Name:** Whatever you want (I use "Kali Pocket")
+
+Tap connect. Enter your password.
+
+**BOOM.** Full Kali Linux desktop with GUI. On your phone.
+
+---
+
+## 🎯 What You Just Unlocked
+
+You now have access to:
+
+* **Metasploit Framework** — Exploitation and pentesting
+* **Nmap** — Network scanning
+* **Wireshark** — Packet analysis  
+* **Burp Suite** — Web app security testing
+* **Aircrack-ng** — Wireless security auditing
+* **John the Ripper** — Password cracking
+* **And 600+ other security tools**
+
+Open a terminal in Kali and run:
+
+```bash
+sudo apt update && sudo apt full-upgrade -y
+```
+
+Want the full tool collection? Install the default package:
+
+```bash
+sudo apt install -y kali-linux-default
+```
+
+Warning: This is a large download (2GB+).
+
+---
+
+## 📋 Quick Command Reference
+
+| Command | What It Does |
+|---------|-------------|
+| `nethunter` | Start Kali CLI |
+| `nethunter kex passwd` | Set/change desktop password |
+| `nethunter kex &` | Start desktop (background) |
+| `nethunter kex stop` | Stop desktop session |
+| `nethunter -r` | Start Kali CLI as root |
+| `nh` | Shortcut for `nethunter` |
+
+---
+
+## Pro-Tips
+
+**Keep Sessions Alive:** Android kills background apps aggressively. Run this in a separate Termux session:
+
+```bash
+termux-wake-lock
+```
+
+Also disable "Battery Optimization" for Termux in your Android settings.
+
+**Backup Your Setup:** Your entire Kali installation lives in `kali-arm64` (or `kali-armhf` on 32-bit devices). Back it up:
+
+```bash
+tar -cJf kali-backup.tar.xz kali-arm64
+mv kali-backup.tar.xz ~/storage/downloads
+```
+
+**Root Access in Kali:** Need root inside the Kali environment? Use:
+
+```bash
+nethunter -r
+```
+
+This gives you root in Kali (not on your Android system).
+
+**Better Display:** In RealVNC Viewer, go to **Advanced Settings** and set a custom resolution like `1920x1080` for a cleaner desktop experience.
+
+---
+
+## 🔗 Resources
+
+* [Official NetHunter Rootless Docs](https://www.kali.org/docs/nethunter/nethunter-rootless/)
+* [NetHunter Store](https://store.nethunter.com)
+* [Kali Linux Forums](https://forums.kali.org/)
+
+---
+
+## Why This Changes Everything
+
+This phone was collecting dust in a drawer. Now it's running the same tools cybersecurity professionals use to make $150K+ a year.
+
+No expensive laptop. No cloud bills. Just three commands and 10 minutes.
+
+The barrier to learning penetration testing just disappeared.
+
+Now go break stuff (ethically).
