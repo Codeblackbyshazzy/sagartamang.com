@@ -100,7 +100,41 @@ The `&` runs it in the background. You'll see output showing the VNC server star
 
 ---
 
-## 7. Connect via VNC
+## 7. Troubleshooting: "Process Killed" or Connection Issues
+
+If you get errors like "process killed" or can't connect to the VNC server, **Android's phantom process restrictions** are likely killing the background processes. Here's how to fix it:
+
+### Option 1: For Android 14 (The Easiest Way)
+
+If you're on Android 14, Google added a hidden setting to fix this:
+
+1. Go to **Settings > Developer Options**
+2. Look for **"Disable child process restrictions"**
+3. Toggle it **ON**
+4. Restart Termux and try running `nethunter kex &` again
+
+### Option 2: Using ADB (Android 12, 13, and 14)
+
+If you have a PC or can use Wireless Debugging, run these three commands via ADB to remove the process limit:
+
+```bash
+adb shell "/system/bin/device_config set_sync_disabled_for_tests persistent"
+adb shell "/system/bin/device_config put activity_manager max_phantom_processes 2147483647"
+adb shell settings put global settings_enable_monitor_phantom_procs false
+```
+
+**This method works reliably across Android versions and is the most effective fix.**
+
+### Option 3: No PC? (Using Shizuku)
+
+If you don't have a computer, you can install the **Shizuku** app from the Play Store.
+
+1. Set up Shizuku using Wireless Debugging (plenty of tutorials on YouTube for this)
+2. Use a terminal app that supports Shizuku (like **Rish**) to run the ADB commands above directly on your phone
+
+---
+
+## 8. Connect via VNC
 
 Open **RealVNC Viewer** (or the NetHunter KeX app you installed earlier).
 
