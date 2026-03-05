@@ -107,6 +107,13 @@ ln -s $(which ollama) $PREFIX/bin/serve
 
 ```
 
+Another Fix for this if the above is not working: 
+
+```bash
+ln -s /data/data/com.termux/files/usr/bin/ollama /data/data/com.termux/files/usr/bin/serve
+
+```
+
 **Error: "manifest not found"**
 
 * **Fix:** This means the specific model tag isn't found. Double-check your spelling or search [ollama.com](https://ollama.com) for the latest Qwen tags.
