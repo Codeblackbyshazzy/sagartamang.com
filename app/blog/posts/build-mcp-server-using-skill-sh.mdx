@@ -12,12 +12,6 @@ I built a fully working **Groww MCP Server** — one that lets Claude trade stoc
 
 ---
 
-## 📺 Video Guide
-
-Coming Soon
-
----
-
 ## 🤖 What Is an MCP Server (and Why Should You Build One)?
 
 **MCP (Model Context Protocol)** is an open standard that lets AI agents like Claude connect to external tools and data sources. When you wrap an API inside an MCP server, your agent can call it as a native tool — no copy-pasting, no tab switching, no manual prompting with raw data.
@@ -34,7 +28,7 @@ The only thing stopping most developers is the setup time. The MCP Builder Skill
 
 ## ⚡ The MCP Builder Skill — What It Does
 
-The **MCP Builder Skill** is a pre-packaged skill you install in your IDE that teaches your coding agent exactly how to scaffold MCP servers — in Python or TypeScript. Once installed, you just describe the API you want to wrap, and the agent handles the rest.
+The **MCP Builder Skill** is a pre-packaged skill you install in your IDE that teaches your coding agent exactly how to scaffold MCP servers — in **Python or TypeScript**. Once installed, you just describe the API you want to wrap, and the agent handles the rest: tool definitions, argument schemas, error handling, and a working entry point.
 
 ---
 
@@ -42,111 +36,48 @@ The **MCP Builder Skill** is a pre-packaged skill you install in your IDE that t
 
 ### Step 1: Get the MCP Builder Skill
 
-Head to **[skills.sh](https://skills.sh)** and search for **`mcp-builder`**.
-
-Copy the install command from the skill's page. It will look something like:
-
-```bash
-npx skills-cli install mcp-builder
-```
+Head to **[skills.sh](https://skills.sh)** and search for **`mcp-builder`**. Copy the install command from the skill's page.
 
 ### Step 2: Open Your IDE
 
-Open your favourite IDE — VS Code, Cursor, Windsurf, or anything with an integrated terminal. Navigate to the project folder where you want to scaffold your MCP server.
+Open your favourite IDE — VS Code, Cursor, Windsurf, whatever you use. Open the terminal inside your project folder.
 
-### Step 3: Run the Install Command
+### Step 3: Paste and Run the Command
 
-Open the terminal and paste the command you copied from skills.sh:
+Paste the command you copied:
 
 ```bash
 npx skills-cli install mcp-builder
 ```
 
-That's it. Your agent now knows how to build an MCP server in **Python or TypeScript** — framework conventions, tool registration, SSE transport, the works.
+Your agent now knows how to build MCP servers in Python or TypeScript — conventions, tool registration, transport layer, all of it baked in.
 
-### Step 4: Instruct Your Agent to Scaffold the API
+### Step 4: Tell Your Agent What to Scaffold
 
-Now just tell your agent what you want. Be specific about the API you're wrapping. For example:
+Now just describe the API you want to wrap in plain English:
 
-> "Scaffold all the Groww Python API endpoints as MCP tools. Use the Groww Python SDK. Expose portfolio, positions, watchlist, and order placement as separate tools."
+> "Scaffold all the Groww Python API endpoints as MCP tools. Expose portfolio, positions, watchlist, and order placement as separate tools."
 
-The agent will generate the full MCP server structure — tool definitions, argument schemas, error handling, and a working `main.py` or `index.ts` entry point.
-
-### Step 5: Configure Your API Keys and Run
-
-Drop your API credentials into the generated `.env` file:
-
-```env
-GROWW_API_KEY=your_api_key_here
-GROWW_API_SECRET=your_api_secret_here
-```
-
-Then start the server:
-
-```bash
-# Python
-uv run main.py
-
-# TypeScript
-npx ts-node index.ts
-```
-
-Your MCP server is now live at `http://127.0.0.1:8000`.
-
-### Step 6: Connect to Claude Desktop
-
-Open your Claude Desktop config (`claude_desktop_config.json`) and add:
-
-```json
-"mcpServers": {
-  "your_mcp_name": {
-    "command": "npx",
-    "args": [
-      "-y",
-      "mcp-remote",
-      "http://127.0.0.1:8000/sse"
-    ]
-  }
-}
-```
-
-Restart Claude Desktop, and your new MCP server is connected as a native tool.
+The agent generates the full server structure for you. No boilerplate written by hand.
 
 ---
 
-## ✅ What Just Happened?
+## ✅ That's It
 
-In under 60 seconds, you went from zero to a fully working MCP server that:
+In under 60 seconds, you went from zero to a fully working MCP server that wraps a real external API as structured tools your agent can call natively.
 
-- Wraps a real external API as structured MCP tools
-- Runs locally and connects to Claude Desktop (or any MCP-compatible client)
-- Handles authentication, request routing, and tool schemas automatically
+The MCP Builder Skill works for **any API** with a Python or TypeScript SDK. Some ideas:
 
-No boilerplate written by hand. No reading through protocol docs. Just a skill, a terminal command, and a natural language instruction.
-
----
-
-## 🌐 Works With Any MCP Client
-
-Because the output is a standard SSE-based MCP server, it's not limited to Claude Desktop. You can point **any MCP-compatible client** at `http://127.0.0.1:8000/sse` — other agents, automation workflows, or custom tooling.
-
----
-
-## 💡 Ideas for What to Build Next
-
-The MCP Builder Skill works for any API that has a Python or TypeScript SDK (or a REST interface). Some ideas:
-
-- **Zerodha / Angel One / Upstox** — wrap your own brokerage's API
-- **Notion / Linear / Jira** — make your PM tools agent-native
-- **Your own internal REST API** — expose company data to your AI agents
+- Your brokerage's trading API (Groww, Zerodha, Upstox)
+- Productivity tools (Notion, Linear, Jira)
+- Your own internal REST APIs
 
 ---
 
 ## 🔗 Resources
 
 - MCP Builder Skill: [skills.sh](https://skills.sh) → search `mcp-builder`
-- Groww MCP Server (full guide): [Read the detailed blog →](/blog/groww-mcp-server)
-- Groww Python MCP Repo: [github.com/SAGAR-TAMANG/groww-python-mcp](https://github.com/SAGAR-TAMANG/groww-python-mcp)
+- Groww MCP Server (full setup guide): [Read the detailed blog →](/blog/groww-mcp-server)
 - Model Context Protocol Docs: [modelcontextprotocol.io](https://modelcontextprotocol.io)
 
 ---
